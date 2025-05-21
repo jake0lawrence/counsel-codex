@@ -1,11 +1,22 @@
 import sys
 import types
+from types import ModuleType
 
 
 def test_make_clauses(monkeypatch) -> None:
-    sys.modules['openai'] = types.SimpleNamespace(ChatCompletion=types.SimpleNamespace(create=lambda *a, **k: {
-        "choices": [{"message": {"content": "- a\n- b\n- c\n- d\n- e\n- f"}}]
-    }))
+    fake_openai = ModuleType("openai")
+    setattr(
+        fake_openai,
+        "ChatCompletion",
+        types.SimpleNamespace(
+            create=lambda *a, **k: {
+                "choices": [
+                    {"message": {"content": "- a\n- b\n- c\n- d\n- e\n- f"}}
+                ]
+            },
+        ),
+    )
+    sys.modules["openai"] = fake_openai
     from src import gpt_clauses
 
 

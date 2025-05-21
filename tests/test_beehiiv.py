@@ -1,9 +1,11 @@
 import sys
-import types
+from types import ModuleType
 
 
 def test_create_campaign_dry_run(capfd, monkeypatch) -> None:
-    sys.modules["requests"] = types.SimpleNamespace(post=lambda *a, **k: None)
+    fake_requests = ModuleType("requests")
+    setattr(fake_requests, "post", lambda *a, **k: None)
+    sys.modules["requests"] = fake_requests
     from src import beehiiv
 
     monkeypatch.delenv("BEEHIIV_TOKEN", raising=False)
