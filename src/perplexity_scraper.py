@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import requests  # type: ignore
 from typing import List
 
@@ -10,7 +11,16 @@ SEARCH_URL = "https://www.perplexity.ai/api/search"
 
 def fetch(theme: str) -> List[str]:
     """Return the top 10 links for the given theme."""
-    resp = requests.get(SEARCH_URL, params={"q": f"{theme} AI law"}, timeout=10)
+    headers = None
+    token = os.getenv("PERPLEXITY_KEY")
+    if token:
+        headers = {"Authorization": f"Bearer {token}"}
+    resp = requests.get(
+        SEARCH_URL,
+        params={"q": f"{theme} AI law"},
+        headers=headers,
+        timeout=10,
+    )
     resp.raise_for_status()
     data = resp.json()
     links: List[str] = []
