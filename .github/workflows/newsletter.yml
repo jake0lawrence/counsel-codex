@@ -1,0 +1,19 @@
+name: Counsel Codex Weekly
+on:
+  schedule:
+    - cron: "0 13 * * FRI"   # Fridays 13:00 UTC
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install -r requirements.txt
+      - run: python -m src.main --theme "AI Contract Drafting"
+        env:
+          OPENAI_API_KEY:   ${{ secrets.OPENAI_API_KEY }}
+          AIRTABLE_KEY:     ${{ secrets.AIRTABLE_KEY }}
+          PERPLEXITY_KEY:   ${{ secrets.PERPLEXITY_KEY }}
+          BEEHIIV_TOKEN:    ${{ secrets.BEEHIIV_TOKEN }}
+          SEGMENT_WRITE_KEY:    ${{ secrets.SEGMENT_WRITE_KEY }}
