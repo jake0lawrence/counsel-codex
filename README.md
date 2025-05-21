@@ -10,3 +10,7 @@ It scrapes fresh AI-law resources, generates ready-to-use contract clauses with 
 | **Dev quick-start** | `pip install -r requirements.txt`<br>`export OPENAI_API_KEY=...`<br>`export AIRTABLE_API_KEY=...`<br>`python -m src.main --theme "AI Contract Drafting"` |
 
 For contributor instructions and repo conventions, see **[AGENTS.md](./AGENTS.md)**.
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
+=======
