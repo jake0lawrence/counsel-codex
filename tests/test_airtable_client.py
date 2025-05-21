@@ -1,9 +1,12 @@
 import sys
-import types
+from types import ModuleType
 
 
 def test_upsert_and_get(monkeypatch) -> None:
-    sys.modules['requests'] = types.SimpleNamespace(post=lambda *a, **k: None, get=lambda *a, **k: None)
+    fake_requests = ModuleType("requests")
+    setattr(fake_requests, "post", lambda *a, **k: None)
+    setattr(fake_requests, "get", lambda *a, **k: None)
+    sys.modules["requests"] = fake_requests
     from src.airtable_client import AirtableClient
 
 

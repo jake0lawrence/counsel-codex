@@ -1,9 +1,11 @@
 import sys
-import types
+from types import ModuleType
 
 
 def test_fetch(monkeypatch) -> None:
-    sys.modules['requests'] = types.SimpleNamespace(get=lambda *a, **k: None)
+    fake_requests = ModuleType("requests")
+    setattr(fake_requests, "get", lambda *a, **k: None)
+    sys.modules["requests"] = fake_requests
     from src import perplexity_scraper
 
 
