@@ -27,7 +27,8 @@ class AirtableClient:
     def upsert_resource(self, resource: dict) -> None:
         """Create or update a resource entry."""
         url = f"{self.base_url}/resources"
-        requests.post(url, json=resource, headers=self._headers(), timeout=10)
+        resp = requests.post(url, json=resource, headers=self._headers(), timeout=10)
+        resp.raise_for_status()
 
     def get_weekly_resources(self, theme: str) -> List[str]:
         """Return resource URLs filtered by theme."""
