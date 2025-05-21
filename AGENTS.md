@@ -1,4 +1,3 @@
-````markdown
 # 🤖 Counsel Codex – Contributor / Agent Guide
 
 This repository powers **Counsel Codex**, an AI-generated newsletter for legal-ops professionals.  
