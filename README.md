@@ -7,6 +7,6 @@ It scrapes fresh AI-law resources, generates ready-to-use contract clauses with 
 |---|---|
 | **Stack** | Python 3.11 • OpenAI • Airtable • Perplexity • Beehiiv |
 | **Automation** | GitHub Actions (cron) |
-| **Dev quick-start** | `pip install -r requirements.txt`<br>`export OPENAI_API_KEY=...`<br>`python -m src.main --theme "AI Contract Drafting"` |
+| **Dev quick-start** | `pip install -r requirements.txt`<br>`export OPENAI_API_KEY=...`<br>`export AIRTABLE_API_KEY=...`<br>`python -m src.main --theme "AI Contract Drafting"` |
 
 For contributor instructions and repo conventions, see **[AGENTS.md](./AGENTS.md)**.
