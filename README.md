@@ -13,4 +13,3 @@ For contributor instructions and repo conventions, see **[AGENTS.md](./AGENTS.md
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
-=======
