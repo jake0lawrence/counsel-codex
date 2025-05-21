@@ -16,20 +16,24 @@ def test_upsert_and_get(monkeypatch) -> None:
     class Response:
         def __init__(self, json_data):
             self._json = json_data
+            self.called = False
 
         def json(self):
             return self._json
 
         def raise_for_status(self):
-            pass
+            self.called = True
+
+    post_resp = Response({})
+    get_resp = Response({"records": [{"url": "http://example.com"}]})
 
     def fake_post(url, json, headers, timeout):
         posts.append((url, json))
-        return Response({})
+        return post_resp
 
     def fake_get(url, params, headers, timeout):
         gets.append((url, params))
-        return Response({"records": [{"url": "http://example.com"}]})
+        return get_resp
 
     monkeypatch.setattr("requests.post", fake_post)
     monkeypatch.setattr("requests.get", fake_get)
@@ -40,3 +44,5 @@ def test_upsert_and_get(monkeypatch) -> None:
 
     assert posts
     assert links == ["http://example.com"]
+    assert post_resp.called
+    assert get_resp.called
