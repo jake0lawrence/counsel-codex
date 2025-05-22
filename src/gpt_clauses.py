@@ -1,5 +1,7 @@
 """Generate contract clause suggestions using OpenAI."""
 
+# pyright: reportAttributeAccessIssue=false
+
 from __future__ import annotations
 
 from typing import List
